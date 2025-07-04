@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: authen-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: authen_db
+      MYSQL_USER: authen_user
+      MYSQL_PASSWORD: authen_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - authen-network
+
+  app:
+    build: .
+    container_name: authen-app
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - authen-network
+
+volumes:
+  mysql_data:
+
+networks:
+  authen-network:
+    driver: bridge
