@@ -1,3 +1,4 @@
+# This project is vide-coding, wrote by claude code.
 # Spring Boot Authentication with OAuth2.0
 
 This project demonstrates a complete Spring Boot application with OAuth2.0 authentication using Google and Facebook SSO, following the MVC pattern.
